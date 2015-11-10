@@ -1,4 +1,17 @@
 <!DOCTYPE html>
+<?php
+include('connect.php');
+session_start();
+$Id=$_SESSION['Id'];
+$query="SELECT `FName`, `LName` FROM `users` WHERE `Id`='$Id'";
+$query_run=mysql_query($query);
+if($query_run)
+{
+	$row=mysql_fetch_assoc($query_run);
+	$FName=$row['FName'];
+	$LName=$row['LName'];
+}
+?>
 <html lang="en">
 <head>
 	
@@ -267,7 +280,7 @@
 		
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 							<img src="assets/images/venkat.png" alt="" class="img-circle" width="44" />
-							Venkata Krishna
+							<?php  echo "$FName $LName";   ?>
 						</a>
 		
 						<ul class="dropdown-menu">
