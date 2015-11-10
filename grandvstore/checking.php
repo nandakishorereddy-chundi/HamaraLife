@@ -21,6 +21,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 	else if($num!=1)
 	{
 		$EmailErr = "User Dosenot Exist";
+		$newURL="index.php";
+		header('Location: '.$newURL);	
 	}
 	else
 	{
