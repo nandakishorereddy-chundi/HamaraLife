@@ -1,0 +1,193 @@
+/* Categories Shortcodes  */
+.prima-multislider {
+	margin:0px;
+	position: relative;
+	
+}
+.prima-multislider-title {
+
+	font:normal 18px Futura;
+	line-height:24px;
+	background:#345790;
+	color:white;
+	padding:5px 10px;
+	display: inline;
+	z-index:3;
+	position: absolute;
+	top: 0;
+}
+#boxed .prima-multislider-title {
+	left:0;
+}
+.prima-multislider ul, div#main-col .prima-multislider ul {
+	list-style: none;
+	margin:0px;
+	padding:0px 0px 0px 0px;
+	width:96%;
+	z-index:1;
+}
+.prima-multislider ul li, div#main-col .prima-multislider ul li {
+	position:relative;
+	padding:0px 3px 0px 18px;
+	margin:0px;
+	float:left;
+	display:inline;
+}
+/* background: #efefef url(images/shortcodes/noimage.png) no-repeat center center; */
+.prima-multislider ul li .prima-multislide-box {
+	text-align: center;
+	position: relative;
+	background: #FFFFFF;
+	border:1px solid #B0C7DD;
+/*	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	-webkit-box-shadow: 1px 1px 2px #bdbdbd;
+	-moz-box-shadow: 1px 1px 2px #bdbdbd;
+	box-shadow: 1px 1px 2px #bdbdbd;*/
+}
+.prima-multislider ul li .prima-multislide-box img {
+}
+.prima-multislider ul li a.prima-multislide-link {
+	display: block;
+	vertical-align: middle;
+	text-align: center;
+	cursor: pointer;
+	margin: 0;
+	padding: 0;
+}
+.prima-multislider ul li:hover a.prima-multislide-link {
+}
+.prima-multislider ul li span.prima-multislide-name{
+	background:#102548;
+	font:normal 16px "Zurich Cn BT";
+	color:#FFFFFF;
+/*	padding:9px 0px ;*/
+	filter:alpha(opacity=80);
+	-moz-opacity:0.80;
+	-khtml-opacity: 0.80;
+	opacity: 0.80;
+	position: absolute;
+	bottom:0;
+	left: 0;
+	display: block;
+	width:100%;
+	text-align: center;
+}
+.prima-multislider ul li span.prima-multislide-name.hide {
+	display: none;
+}
+.prima-multislider ul li:hover span.prima-multislide-name {
+	display: block;
+}
+.prima-multislider ul li span.prima-multislide-name span {
+	display: block;
+	font: normal 16px "Zurich Cn BT";
+	line-height: 16px;
+	padding-top:8px;
+	height: 22px;
+	overflow: hidden;
+}
+.prima-multislider ul li .prima-multislide-meta {
+	position: absolute;
+	top: 0;
+	display: table;
+}
+.prima-multislider ul li .prima-multislide-meta.hide {
+	display: none;
+}
+.prima-multislider ul li:hover .prima-multislide-meta {
+	display: table;
+}
+.prima-multislider ul li .prima-multislide-meta p {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+.prima-multislider ul li .prima-multislide-meta a.ps-button {
+	margin: 0;
+}
+.prima-multislider ul li .sale-icon {
+	display:block;
+	width:56px;
+	height:56px;
+	background:url(images/sale.png) no-repeat;
+	text-indent: -9999px;
+	position: absolute;
+	top:-6px;
+	right:-6px;
+	z-index:2;
+}
+.prima-multislider a.bx-next{
+	display:block;
+	width:33px;
+	height:9px;
+	background:url(../images/header/ar-right.png) no-repeat;
+	position: absolute;
+	right:-10px;
+	top:50%;
+	margin:-10px 0 0 0;
+	padding: 0;
+	text-indent: -9999px;
+	z-index:3;	
+	filter:alpha(opacity=100);
+	-moz-opacity:1;
+	-khtml-opacity:1;
+	opacity:1;
+}
+.prima-multislider a.bx-next:hover {
+	
+	filter:alpha(opacity=50);
+	-moz-opacity:0.5;
+	-khtml-opacity: 0.5;
+	opacity: 0.5;
+}
+.prima-multislider.slider_auto a.bx-next{
+	display: none;
+}
+.prima-multislider a.bx-prev{
+	display:block;
+	width:33px;
+	height:33px;
+	background:url(../images/header/arrow.png) no-repeat;
+	position: absolute;
+	left:0px;
+	top:50%;
+	margin:0px;
+	padding: 0;
+	text-indent: -9999px;
+	z-index:99999;	
+	filter:alpha(opacity=100);
+	-moz-opacity:1;
+	-khtml-opacity:1;
+	opacity:1;
+}
+.prima-multislider a.bx-prev:hover {
+	filter:alpha(opacity=50);
+	-moz-opacity:0.5;
+	-khtml-opacity: 0.5;
+	opacity: 0.5;
+}
+.prima-multislider.slider_auto a.bx-prev{
+	display: none;
+}
+
+#ie7 .prima-multislider ul li a.prima-multislide-link {
+	margin-top: 0;
+}
+#ie7 .prima-multislider ul li {
+	position: relative;
+}
+#ie7 .prima-multislider ul li .prima-multislide-meta {
+	position: absolute;
+	top: 50%;
+}
+#ie7 .prima-multislider ul li .prima-multislide-meta p {
+	position: relative;
+	margin-top: -1em;
+}
+#ie7 .prima-multislider ul li:hover .prima-multislide-meta {
+	position: absolute;
+	top: 50%;
+	display: block;
+}

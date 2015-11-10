@@ -1,0 +1,64 @@
+/*-------LOGIN STARTS HERE -------*/
+
+/* Login Container (default to float:right) */
+#loginContainer {
+    position:relative;
+    float:right;
+    font-size:12px;
+}
+
+/* Login Button */
+#loginButton { 
+    display:inline-block;
+    float:right;
+	margin:0px 0px 0px -4px;
+    position:relative;
+    z-index:30;
+    cursor:pointer;
+    color: #ffffff;
+	background:url(../images/header/login-bg.jpg) no-repeat;
+}
+
+/* Login Button Text */
+#loginButton span {
+    font:normal 18px 'Tauri', sans-serif;
+	font-size:15px; text-transform:uppercase;
+    display:block;
+	padding:10px 60px 11px 20px;
+	text-decoration: none;
+}
+
+#loginButton:hover {
+	color:#FFFFFF;
+	background:url(../images/header/login-bg-o.jpg) no-repeat;
+}
+
+/* Login Box */
+#loginBox {
+    position:absolute;
+    top:40px;
+    right:0;
+    display:none;
+    z-index:29;
+}
+
+
+/* Login Form */
+#loginForm {
+    padding:5px 5px 5px 0px;
+	background:url(../images/header/login-bg1.jpg) no-repeat;
+	width:238px;
+	height:95px;
+}
+
+#loginForm fieldset {
+    margin:5px 0 6px 0;
+    display:block;
+    border:0;
+    padding:0;
+}
+
+fieldset#body {
+    padding:0px;
+    margin:0;
+}

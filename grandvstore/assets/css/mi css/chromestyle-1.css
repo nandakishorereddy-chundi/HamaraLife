@@ -1,0 +1,131 @@
+@import url(http://fonts.googleapis.com/css?family=Tauri);
+.chromestyle{
+width: 100%;
+font:normal 18px 'Tauri', sans-serif;
+font-size:13px; /*text-transform:uppercase;*/
+color:#4d4e53;
+line-height:40px;
+padding:0px;
+margin:0px;
+}
+
+.chromestyle:after{ /*Add margin between menu and rest of content in Firefox*/
+content: "."; 
+display: block; 
+height: 0; 
+clear: both; 
+visibility: hidden;
+}
+
+.chromestyle ul{
+border: 0px solid #BBB;
+width: 100%;
+background: url(chromebg.gif) center center repeat-x; /*THEME CHANGE HERE*/
+padding:0;
+margin:0px;
+text-align: right; /*set value to "left", "center", or "right"*/
+}
+
+.chromestyle ul li{
+display: inline;
+}
+
+.chromestyle ul li a{
+color: #4d4e53;
+padding:12px 10px 12px 10px;
+margin:0px 0px 0px -4px;
+text-decoration: none;
+border-left:1px solid #dddddd;
+}
+
+.chromestyle ul li a:hover, .chromestyle ul li a.selected{ /*script dynamically adds a class of "selected" to the current active menu item*/
+background:url(../images/header/menu-o.jpg) no-repeat center top;
+color:#ffffff;
+}
+
+/* ######### Style for Drop Down Menu ######### */
+
+.dropmenudiv{
+position:absolute;
+margin:-1px 0 0 1px;
+padding:0px 0 0px 0;
+font:normal 13px 'Tauri', sans-serif;
+border-top:3px solid #581475;
+/*border-bottom:3px solid #FFFFFF;
+border-left:1px solid #FFFFFF;
+border-right:1px solid #FFFFFF;*/
+line-height:18px;
+z-index:100;
+background-color:#f4f8fb;
+
+visibility: hidden;
+/*-moz-border-radius:0px 0px 6px 6px;
+-webkit-border-radius:0px 0px 6px 6px;
+-khtml-border-radius:0px 0px 6px 6px;
+border-radius:0px 0px 6px 6px;*/
+/*filter:alpha(opacity=95);
+-moz-opacity:0.95;
+opacity:0.95;*/
+}
+
+
+.dropmenudiv a{
+width: auto;
+display: block;
+border-bottom: 1px dotted #FFFFFF; /*THEME CHANGE HERE*/
+padding: 5px 5px 5px 6px;
+text-decoration: none;
+color:#595a5e;
+}
+
+* html .dropmenudiv a{ /*IE only hack*/
+width: 100%;
+
+}
+
+.dropmenudiv a:hover{ /*THEME CHANGE HERE*/
+color:#000000;
+/*background-color:#FFFFFF;*/
+}
+
+.dy-menu a{
+width:136px;
+border-bottom:1px solid #dddddd; /*THEME CHANGE HERE*/
+float:left;
+padding:6px 5px 6px 12px;
+margin:0px;
+text-decoration:none;
+color:#595a5e;
+}
+.dy-menu a:hover{
+color:#000000;
+background:url(../images/header/menu1-o.jpg) repeat-y;
+}
+.dy-menu1 a{
+width:190px;
+border-bottom:1px solid #dddddd; /*THEME CHANGE HERE*/
+float:left;
+padding:6px 5px 6px 12px;
+margin:0px;
+text-decoration:none;
+color:#595a5e;
+}
+.dy-menu1 a:hover{
+color:#000000;
+width:190px;
+background:url(../images/header/menu2-o.jpg) repeat-y;
+}
+.dy-menu2 a{
+width:270px;
+border-bottom:1px solid #dddddd; /*THEME CHANGE HERE*/
+float:left;
+padding:6px 5px 6px 12px;
+margin:0px;
+text-decoration:none;
+color:#595a5e;
+}
+.dy-menu2 a:hover{
+color:#000000;
+width:270px;
+background:url(../images/header/menu3-o.jpg) repeat-y;
+}
