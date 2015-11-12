@@ -51,10 +51,6 @@ $query_run=mysql_query($query);
 	  $Nomineeage=$row['Nomineeage'];
 	  $Flag=$row['Flag'];
 	}
-	else
-	{
-		echo "failed";
-	}
 ?>
 <html lang="en">
 <head>
@@ -903,7 +899,7 @@ $query_run=mysql_query($query);
                                                             :
                                                         </td>
                                                         <td height="30" align="left">
-                                                           <span id="ctl00_MainContent_lblttle" class="Label_Orange"><?php echo "$FName" ?></span> &nbsp; <span id="ctl00_MainContent_lblname" class="Label_Orange">NARESH</span>
+                                                           <span id="ctl00_MainContent_lblttle" class="Label_Orange"><?php echo "$FName" ?></span> &nbsp;
                                                         </td>
                                                         <td class="listhead">
                                                             <label id="fon">Last Name <span style="color:#C00000;">*</span></label>

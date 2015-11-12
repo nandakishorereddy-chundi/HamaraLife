@@ -1,26 +1,74 @@
 <!DOCTYPE .php>
 <?php
-include ('connect.php');
-$Id=$_GET['Id'];
-if ($_SERVER["REQUEST_METHOD"] == "POST")
-{
-    $Nomineename=$_POST['Nomineename'];
-    $Nomineerelation=$_POST['Nomineerelation'];
-    $Nomineeage=$_POST['Nomineeage'];
-    $query= "UPDATE `users` SET `Nomineename`='$Nomineename',`Nomineerelation`='$Nomineerelation',`Nomineeage`='$Nomineeage'
-     WHERE `Id`='$Id'";
-    $query_run=mysql_query($query);
-    if($query_run)
-    {
-      
-    }
-    else
-    {
-      
-    }
-}
+include('connect.php');
+session_start();
+$Id=$_SESSION['Id'];
+$query="SELECT `OrderId`, `Product`, `FName`, `LName`, `PhoneNo`, `Email`, `Gender`, `DOB`, `PAN`, `RefId`, `Password`, 
+`Martialstatus`, `Address1`, `Address2`, `City`, `State`, `Country`, `PIN`, `AccountNo`, `Bankname`, `IFSCcode`, `Branchname`,
+`Nomineename`, `Nomineerelation`, `Nomineeage`, `Flag` FROM `users` WHERE `Id`='$Id'";
+$query_run=mysql_query($query);
+	if($query_run)
+	{
+	  $row=mysql_fetch_assoc($query_run);
+	  $OrderId=$row['OrderId'];
+      $Product=$row['Product'];
+	  $FName=$row['FName'];
+	  $LName=$row['LName'];
+	  $PhoneNo=$row['PhoneNo'];
+	  $Email=$row['Email'];
+	  $Gender=$row['Gender'];
+	  if($Gender==0)
+	  		$Gender="Male";
+	  else
+	  		$Gender="Female";
+	  $DOB=$row['DOB'];
+	  $PAN=$row['PAN'];
+	  $RefId=$row['RefId'];
+	  // php code to get ref name using refId
+	  $query="SELECT `FName`,`LName` FROM `users` WHERE `Id`='$RefId'";
+	  $query_run=mysql_query($query);
+	  $row1=mysql_fetch_assoc($query_run);
+	  $RefName=$row1['FName'];
+	  $RefName=$RefName." ".$row1['LName'];
+	  $PayeeName=$FName." ".$LName;
+	  $Martialstatus=$row['Martialstatus'];
+	  if($Martialstatus==0)
+	  		$Martialstatus="Single";
+	  else
+	  		$Martialstatus="Married";
+	  $Address1=$row['Address1'];
+	  $Address2=$row['Address2'];
+	  $City=$row['City'];
+	  $State=$row['State'];
+	  $Country=$row['Country'];
+	  $PIN=$row['PIN'];
+	  $AccountNo=$row['AccountNo'];
+	  $Bankname=$row['Bankname'];
+	  $IFSCcode=$row['IFSCcode'];
+	  $Branchname=$row['Branchname'];
+	  $Nomineename=$row['Nomineename'];
+	  $Nomineerelation=$row['Nomineerelation'];
+	  $Nomineeage=$row['Nomineeage'];
+	  $Flag=$row['Flag'];
+	}
+	if ($_SERVER["REQUEST_METHOD"] == "POST")
+	{
+	    $Nomineename=$_POST['Nomineename'];
+	    $Nomineerelation=$_POST['Nomineerelation'];
+	    $Nomineeage=$_POST['Nomineeage'];
+	    $query= "UPDATE `users` SET `Nomineename`='$Nomineename',`Nomineerelation`='$Nomineerelation',`Nomineeage`='$Nomineeage'
+	     WHERE `Id`='$Id'";
+	    $query_run=mysql_query($query);
+	    if($query_run)
+	    {
+	     	echo ("<SCRIPT LANGUAGE='JavaScript'>
+					window.alert('Succesfully Updated')
+					window.location.href='home.php';
+				  </SCRIPT>"); 
+	    }
+	}
 ?>
-<.php lang="en">
+<html lang="en">
 <head>
 	
 
@@ -282,7 +330,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 		
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 							<img src="assets/images/venkat.png" alt="" class="img-circle" width="44" />
-							Venkata Krishna
+							<?php  echo "$FName $LName";   ?>
 						</a>
 		
 						<ul class="dropdown-menu">
@@ -753,7 +801,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
                                 <td align="left" valign="bottom" class="heading-title">
                                     <h1>Show Profile</h1>
                                 </td>
-                                
+                                <td align="right" valign="bottom" class="heading-title">
+                                    <?php if($Flag==0){ ?>
+                                    	<h1>NOT ACTIVE</h1>
+                                    <?php } ?>
+                                    <?php if($Flag==1){ ?>
+                                    	<h1>ACTIVE</h1>
+                                    <?php } ?>
+                                </td>
                             </tr>
                         </tbody></table>
                     </td>
@@ -791,16 +846,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
                                                             :
                                                         </td>
                                                         <td height="30" class="inputlabel">
-                                                            <span id="ctl00_MainContent_lblsprname" class="Label_Orange">5454785225</span>
+                                                            <span id="ctl00_MainContent_lblsprname" class="Label_Orange"><?php echo "$RefId" ?></span>
                                                         </td>
                                                         <td height="30" class="listhead">
-                                                            <label id="fon">Sponcer Name<span style="color:#C00000;">*</span>&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                                          <label id="fon">Sponcer Name <span style="color:#C00000;">*</span>&nbsp;&nbsp;&nbsp;&nbsp;</label>
                                                         </td>
                                                         <td class="listhead">
                                                             :
                                                         </td>
                                                         <td height="30" class="inputlabel">
-                                                            <span id="ctl00_MainContent_lblspruname" class="Label_Orange">ARUN KUMAR </span>
+                                                            <span id="ctl00_MainContent_lblspruname" class="Label_Orange"><?php echo "$RefName" ?></span>
                                                         </td>
                                                     </tr>
 													 <tr>
@@ -811,7 +866,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
                                                             :
                                                         </td>
                                                         <td height="30" class="inputlabel">
-                                                            <span id="ctl00_MainContent_lblsprname" class="Label_Orange">545425</span>
+                                                            <span id="ctl00_MainContent_lblsprname" class="Label_Orange"><?php echo "$OrderId" ?></span>
                                                         </td>
 													 </tr>
                                                     <tr>
@@ -859,7 +914,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
                                                             :
                                                         </td>
                                                         <td height="30" align="left">
-                                                           <span id="ctl00_MainContent_lblttle" class="Label_Orange">Mr.</span> &nbsp; <span id="ctl00_MainContent_lblname" class="Label_Orange">NARESH</span>
+                                                           <span id="ctl00_MainContent_lblttle" class="Label_Orange"><?php echo "$FName" ?></span> &nbsp;
                                                         </td>
                                                         <td class="listhead">
                                                             <label id="fon">Last Name <span style="color:#C00000;">*</span></label>
@@ -868,82 +923,73 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
                                                             :
                                                         </td>
                                                         <td height="30" align="left">
-                                                            <span id="ctl00_MainContent_lblmobile" class="Label_Orange">KUMAR</span>
+                                                            <span id="ctl00_MainContent_lblmobile" class="Label_Orange"><?php echo "$LName" ?></span>
                                                         </td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr>                                                     
                                                         <td height="30" class="listhead">
-                                                            <label id="fon">Father Name <span style="color:#C00000;">*</span></label>
+                                                            <label id="fon">Phone <span style="color:#C00000;">*</span></label>
                                                         </td>
                                                         <td class="listhead">
                                                             :
                                                         </td>
                                                         <td height="30" align="left">
-                                                            <span id="ctl00_MainContent_lblFathername" class="Label_Orange">srinivas valli</span>
+                                                            <span id="ctl00_MainContent_lblSecMobile" class="Label_Orange"><?php echo "$PhoneNo" ?></span>
                                                         </td>
-                                                        
                                                         <td height="30" class="listhead">
-                                                            <label id="fon">Mobile <span style="color:#C00000;">*</span></label>
+                                                            <label id="fon">Marital Status &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
                                                         </td>
                                                         <td class="listhead">
                                                             :
                                                         </td>
                                                         <td height="30" align="left">
-                                                            <span id="ctl00_MainContent_lblSecMobile" class="Label_Orange">0000000000</span>
+                                                            <span id="ctl00_MainContent_lblMaritalStatus" class="Label_Orange"><?php echo "$Martialstatus" ?></span>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td height="30" class="listhead">
-                                                            <label id="fon">Mother Name <span style="color:#C00000;">*</span></label>
-                                                        </td>
-                                                        <td class="listhead">
-                                                            :
-                                                        </td>
-                                                        <td height="30" class="inputlabel" align="left">
-                                                            <span id="ctl00_MainContent_lblMothername" class="Label_Orange">saritha</span>
-                                                        </td>
-                                                        <td height="30" class="listhead">
-                                                          <label id="fon">Marital Status &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                                                        </td>
-                                                        <td class="listhead">
-                                                            :
-                                                        </td>
-                                                        <td height="30" align="left">
-                                                            <span id="ctl00_MainContent_lblMaritalStatus" class="Label_Orange">Single</span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td height="30" class="listhead">
-                                                           <label id="fon">Gender  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	</label>
+                                                            <label id="fon">Gender  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	</label>
                                                         </td>
                                                         <td class="listhead">
                                                             :
                                                         </td>
                                                         <td align="left" height="30">
-                                                            <span id="ctl00_MainContent_lblgen" class="Label_Orange">Male</span>
+                                                            <span id="ctl00_MainContent_lblgen" class="Label_Orange"><?php echo "$Gender" ?></span>
                                                         </td>
                                                         <td height="30" class="listhead">
-                                                           <label id="fon">Address <span style="color:#C00000;">*</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <label id="fon">Date of birth <span style="color:#C00000;">*</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 															</label>
                                                         </td>
                                                         <td class="listhead">
                                                             :
                                                         </td>
                                                         <td height="30" align="left">
-                                                            <span id="ctl00_MainContent_lbladd1" class="Label_Orange">d.no 8-5-325: Bank Street, Hydernagar</span>
+                                                            <span id="ctl00_MainContent_lbladd1" class="Label_Orange"><?php echo "$DOB" ?></span>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td height="30" class="listhead">
-                                                           <label id="fon">Date of birth <span style="color:#C00000;">*</span>
+                                                            <label id="fon">Address1<span style="color:#C00000;">*</span>
 															</label>
                                                         </td>
                                                         <td class="listhead">
                                                             :
                                                         </td>
                                                         <td height="30" class="inputlabel" align="left">
-                                                            <span id="ctl00_MainContent_lbldob" class="Label_Orange">6/10/1987</span>
+                                                            <span id="ctl00_MainContent_lbldob" class="Label_Orange"><?php echo "$Address1" ?></span>
                                                         </td>
+                                                        <td height="30" class="listhead">
+                                                            <label id="fon">Address2<span style="color:#C00000;">*</span>
+															</label>
+                                                        </td>
+                                                        <td class="listhead">
+                                                            :
+                                                        </td>
+                                                        <td height="30" class="inputlabel" align="left">
+                                                            <span id="ctl00_MainContent_lbldob" class="Label_Orange"><?php echo "$Address2" ?></span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
                                                         <td height="30" class="listhead">
                                                             <label id="fon">City / Town<span style="color:#C00000;"></span>
 															</label>
@@ -952,39 +998,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
                                                             :
                                                         </td>
                                                         <td height="30" class="inputlabel" align="left">
-                                                            <span id="ctl00_MainContent_lblcity" class="Label_Orange">Hyderabad</span>
+                                                            <span id="ctl00_MainContent_lblcity" class="Label_Orange"><?php echo "$City" ?></span>
                                                         </td>
-                                                    </tr>
-                                                    <tr>
                                                         <td height="30" class="listhead">
-                                                              <label id="fon">PAN <span style="color:#C00000;">*</span></label>
+                                                          <label id="fon">State<span style="color:#C00000;">*</span></label>
                                                         </td>
                                                         <td class="listhead">
                                                             :
                                                         </td>
                                                         <td height="30" class="inputlabel" align="left">
-                                                            <span id="ctl00_MainContent_lblpan" class="Label_Orange">KLSPS6585P</span>
+                                                            <span id="ctl00_MainContent_lblpan" class="Label_Orange"><?php echo "$State" ?></span>
                                                         </td>
+                                                    <tr>
                                                         <td height="30" class="listhead">
-                                                           <label id="fon">State <span style="color:#C00000;"></span>
+                                                          <label id="fon">PAN<span style="color:#C00000;"></span>
 															</label>
                                                         </td>
                                                         <td class="listhead">
                                                             :
                                                         </td>
                                                         <td height="30" align="left">
-                                                            <span id="ctl00_MainContent_lblstate" class="Label_Orange">ANDHRA PRADESH</span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td height="30" class="listhead">
-                                                           <label id="fon">Email <span style="color:#C00000;">*</span></label>
-                                                        </td>
-                                                        <td class="listhead">
-                                                            :
-                                                        </td>
-                                                        <td height="30" class="inputlabel" align="left">
-                                                            <span id="ctl00_MainContent_lblemail" class="Label_Orange">naresh@gmail.com</span>
+                                                            <span id="ctl00_MainContent_lblstate" class="Label_Orange"><?php echo "$PAN" ?></span>
                                                         </td>
                                                         <td height="30" class="listhead">
                                                             <label id="fon">Pincode <span style="color:#C00000;">*</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -994,30 +1028,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
                                                             :
                                                         </td>
                                                         <td height="30" align="left">
-                                                            <span id="ctl00_MainContent_lblpin" class="Label_Orange">500090</span>
+                                                            <span id="ctl00_MainContent_lblpin" class="Label_Orange"><?php echo "$PIN" ?></span>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td height="30" class="listhead">
-                                                            <label id="fon">Occupation <span style="color:#C00000;"></span>
-															</label>
+                                                            <label id="fon">Email <span style="color:#C00000;">*</span></label>
                                                         </td>
                                                         <td class="listhead">
                                                             :
                                                         </td>
-                                                        <td height="30" align="left">
-                                                            <span id="ctl00_MainContent_lblOccupation" class="Label_Orange"></span>
-                                                        </td>
-                                                       
-                                                        <td class="listhead">
-                                                             <label id="fon">Mode of communication <span style="color:#C00000;"></span>
-															</label>
-                                                        </td>
-                                                        <td class="listhead">
-                                                            :
-                                                        </td>
-                                                        <td height="30" align="left">
-                                                            <span id="ctl00_MainContent_lblCommunication" class="Label_Orange"></span>
+                                                        <td height="30" class="inputlabel" align="left">
+                                                            <span id="ctl00_MainContent_lblemail" class="Label_Orange"><?php echo "$Email" ?></span>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -1065,7 +1087,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
                                                             :
                                                         </td>
                                                         <td height="30" align="left" colspan="3">
-                                                            <span id="ctl00_MainContent_lblpayeename" class="Label_Orange"></span>
+                                                            <span id="ctl00_MainContent_lblpayeename" class="Label_Orange"><?php echo "$PayeeName" ?></span>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -1076,7 +1098,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
                                                             :
                                                         </td>
                                                         <td height="30" align="left">
-                                                            <span id="ctl00_MainContent_lblaccno" class="Label_Orange">335689545852</span>
+                                                            <span id="ctl00_MainContent_lblaccno" class="Label_Orange"><?php echo "$AccountNo" ?></span>
                                                         </td>
                                                         <td height="30" class="listhead">
                                                            <label id="fon">	Bank Name <span style="color:#C00000;">*</span></label>
@@ -1085,19 +1107,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
                                                             :
                                                         </td>
                                                         <td height="30" class="inputlabel" align="left">
-                                                            <span id="ctl00_MainContent_lblbank" class="Label_Orange">STATE BANK OF INDIA</span>
+                                                            <span id="ctl00_MainContent_lblbank" class="Label_Orange"><?php echo "$Bankname" ?></span>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td height="30" class="listhead">
-                                                           <label id="fon">IFSC Code	<span style="color:#C00000;">*</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <label id="fon">IFSC Code	<span style="color:#C00000;">*</span>&nbsp;&nbsp;&nbsp;&nbsp;
 												</label>
                                                         </td>
                                                         <td class="listhead">
                                                             :
                                                         </td>
                                                         <td height="30" align="left">
-                                                            <span id="ctl00_MainContent_lblifscode" class="Label_Orange">sbin0000989</span>
+                                                            <span id="ctl00_MainContent_lblifscode" class="Label_Orange"><?php echo "$IFSCcode" ?></span>
                                                         </td>
                                                         <td height="30" class="listhead">
                                                             <label id="fon">	Branch Name <span style="color:#C00000;">*</span>
@@ -1107,7 +1129,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
                                                             :
                                                         </td>
                                                         <td height="30" class="inputlabel" align="left">
-                                                            <span id="ctl00_MainContent_lblbranch" class="Label_Orange">PRAKASH NAGAR</span>
+                                                            <span id="ctl00_MainContent_lblbranch" class="Label_Orange"><?php echo "$Branchname" ?></span>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -1127,7 +1149,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
                     <td height="40" align="left" valign="bottom" style="padding-top: 10px;">
                         <div class="form_default" style="padding-left: 25px; text-align: left;">
                             <div class="customerInfo">
-                             <form action='form3.php?Id=<?php echo "$Id" ?>' method="POST">
+                             <form action='form3.php' method="POST">
                                 <fieldset class="register">
                                     <legend><strong>Nominee Information</strong><span style="margin-left:+650px;"><i class="entypo-pencil"></i><input type="submit" value="Update3"></span></legend>
                                     <table align="center" border="0" cellpadding="6" cellspacing="0" class="tborder" width="100%">

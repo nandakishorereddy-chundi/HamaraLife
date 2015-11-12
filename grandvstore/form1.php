@@ -1,36 +1,91 @@
 <!DOCTYPE html>
 <?php
-include ('connect.php');
-$Id=$_GET['Id'];
-if ($_SERVER["REQUEST_METHOD"] == "POST")
-{
-    $Name=$_POST['Name'];
-    $Fathername=$_POST['Fathername'];
-    $Mothername=$_POST['Mothername'];
-    $PhoneNo=$_POST['PhoneNo'];
-    $Email=$_POST['Email'];
-    $Gender=$_POST['Gender'];
-    $DOB=$_POST['DOB'];
-    $PAN=$_POST['PAN'];
-    $Occupation=$_POST['Occupation'];
-    $Martialstatus=$_POST['Martialstatus'];
-    $Address=$_POST['Address'];
-    $City=$_POST['City'];
-    $State=$_POST['State'];
-    $PIN=$_POST['PIN'];
-    $query= "UPDATE `users` SET `Name`='$Name',`Fathername`='$Fathername',`Mothername`='$Mothername',`PhoneNo`='$PhoneNo',
-    `Email`='$Email',`Gender`='$Gender',`DOB`='$DOB',`PAN`='$PAN',`Occupation`='$Occupation',`Martialstatus`='$Martialstatus',
-    `Address`='$Address',`City`='$City',`State`='$State',`PIN`='$PIN' WHERE `Id` = '$Id'";
-    $query_run=mysql_query($query);
-    if($query_run)
-    {
-      echo "success";
-    }
-    else
-    {
-      echo "failure";
-    }
-}
+include('connect.php');
+session_start();
+$Id=$_SESSION['Id'];
+$query="SELECT `OrderId`, `Product`, `FName`, `LName`, `PhoneNo`, `Email`, `Gender`, `DOB`, `PAN`, `RefId`, `Password`, 
+`Martialstatus`, `Address1`, `Address2`, `City`, `State`, `Country`, `PIN`, `AccountNo`, `Bankname`, `IFSCcode`, `Branchname`,
+`Nomineename`, `Nomineerelation`, `Nomineeage`, `Flag` FROM `users` WHERE `Id`='$Id'";
+$query_run=mysql_query($query);
+	if($query_run)
+	{
+	  $row=mysql_fetch_assoc($query_run);
+	  $OrderId=$row['OrderId'];
+      $Product=$row['Product'];
+	  $FName=$row['FName'];
+	  $LName=$row['LName'];
+	  $PhoneNo=$row['PhoneNo'];
+	  $Email=$row['Email'];
+	  $Gender=$row['Gender'];
+	  if($Gender==0)
+	  		$Gender="Male";
+	  else
+	  		$Gender="Female";
+	  $DOB=$row['DOB'];
+	  $PAN=$row['PAN'];
+	  $RefId=$row['RefId'];
+	  // php code to get ref name using refId
+	  $query="SELECT `FName`,`LName` FROM `users` WHERE `Id`='$RefId'";
+	  $query_run=mysql_query($query);
+	  $row1=mysql_fetch_assoc($query_run);
+	  $RefName=$row1['FName'];
+	  $RefName=$RefName." ".$row1['LName'];
+	  $PayeeName=$FName." ".$LName;
+	  $Martialstatus=$row['Martialstatus'];
+	  if($Martialstatus==0)
+	  		$Martialstatus="Single";
+	  else
+	  		$Martialstatus="Married";
+	  $Address1=$row['Address1'];
+	  $Address2=$row['Address2'];
+	  $City=$row['City'];
+	  $State=$row['State'];
+	  $Country=$row['Country'];
+	  $PIN=$row['PIN'];
+	  $AccountNo=$row['AccountNo'];
+	  $Bankname=$row['Bankname'];
+	  $IFSCcode=$row['IFSCcode'];
+	  $Branchname=$row['Branchname'];
+	  $Nomineename=$row['Nomineename'];
+	  $Nomineerelation=$row['Nomineerelation'];
+	  $Nomineeage=$row['Nomineeage'];
+	  $Flag=$row['Flag'];
+	}
+	if ($_SERVER["REQUEST_METHOD"] == "POST")
+	{
+	    $FName=$_POST['FName'];
+	    $LName=$_POST['LName'];
+	    $PhoneNo=$_POST['PhoneNo'];
+	    $Email=$_POST['Email'];
+	    $Gender=$_POST['Gender'];
+	    if($Gender==0)
+	  		$Gender="Male";
+	    else
+	  		$Gender="Female";
+	    $DOB=$_POST['DOB'];
+	    $PAN=$_POST['PAN'];
+	    $Martialstatus=$_POST['Martialstatus'];
+	    if($Martialstatus==0)
+	  		$Martialstatus="Single";
+	    else
+	  		$Martialstatus="Married";
+	    $Address1=$_POST['Address1'];
+	    $Address2=$_POST['Address2'];
+	    $City=$_POST['City'];
+	    $State=$_POST['State'];
+	    $PIN=$_POST['PIN'];
+	    $query= "UPDATE `users` SET `FName`='$FName',`LName`='$LName',`PhoneNo`='$PhoneNo',`Email`='$Email',`Gender`='$Gender',`DOB`='$DOB',
+	    `PAN`='$PAN',`Martialstatus`='$Martialstatus',`Address1`='$Address1',`Address2`='$Address2',`City`='$City',`State`='$State',
+	    `PIN`='$PIN' WHERE `Id` = '$Id'";
+	    $query_run=mysql_query($query);
+	    if($query_run)
+	    {
+	      echo ("<SCRIPT LANGUAGE='JavaScript'>
+					window.alert('Succesfully Updated')
+					window.location.href='home.php';
+				  </SCRIPT>");
+	    }
+	}
 ?>
 <html lang="en">
 <head>
@@ -294,7 +349,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 		
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 							<img src="assets/images/venkat.png" alt="" class="img-circle" width="44" />
-							Venkata Krishna
+							<?php  echo "$FName $LName";   ?>
 						</a>
 		
 						<ul class="dropdown-menu">
@@ -765,7 +820,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
                                 <td align="left" valign="bottom" class="heading-title">
                                     <h1>Show Profile</h1>
                                 </td>
-                                
+                                <td align="right" valign="bottom" class="heading-title">
+                                    <?php if($Flag==0){ ?>
+                                    	<h1>NOT ACTIVE</h1>
+                                    <?php } ?>
+                                    <?php if($Flag==1){ ?>
+                                    	<h1>ACTIVE</h1>
+                                    <?php } ?>
+                                </td>
                             </tr>
                         </tbody></table>
                     </td>
@@ -803,16 +865,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
                                                             :
                                                         </td>
                                                         <td height="30" class="inputlabel">
-                                                            <span id="ctl00_MainContent_lblsprname" class="Label_Orange">5454785225</span>
+                                                            <span id="ctl00_MainContent_lblsprname" class="Label_Orange"><?php echo "$RefId" ?></span>
                                                         </td>
                                                         <td height="30" class="listhead">
-                                                            <label id="fon">Sponcer Name<span style="color:#C00000;">*</span>&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                                          <label id="fon">Sponcer Name <span style="color:#C00000;">*</span>&nbsp;&nbsp;&nbsp;&nbsp;</label>
                                                         </td>
                                                         <td class="listhead">
                                                             :
                                                         </td>
                                                         <td height="30" class="inputlabel">
-                                                            <span id="ctl00_MainContent_lblspruname" class="Label_Orange">ARUN KUMAR </span>
+                                                            <span id="ctl00_MainContent_lblspruname" class="Label_Orange"><?php echo "$RefName" ?></span>
                                                         </td>
                                                     </tr>
 													 <tr>
@@ -823,7 +885,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
                                                             :
                                                         </td>
                                                         <td height="30" class="inputlabel">
-                                                            <span id="ctl00_MainContent_lblsprname" class="Label_Orange">545425</span>
+                                                            <span id="ctl00_MainContent_lblsprname" class="Label_Orange"><?php echo "$OrderId" ?></span>
                                                         </td>
 													 </tr>
                                                     <tr>
@@ -843,7 +905,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
                     <td height="40" align="left" valign="bottom" style="padding-top: 10px;">
                         <div class="form_default" style="padding-left: 25px; text-align: left;">
                             <div class="customerInfo">
-                             <form action='form1.php?Id=<?php echo "$Id" ?>' method="POST">
+                             <form action='form1.php' method="POST">
                                 <fieldset class="register">
                                     <legend><strong>Personal Information</strong><span style="margin-left:+650px;"><i class="entypo-pencil"></i><input type="submit" value="Update1"></span></legend>
                                     <table align="center" border="0" cellpadding="6" cellspacing="0" class="tborder" width="100%">
@@ -873,7 +935,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
                                                             :
                                                         </td>
                                                         <td height="30" align="left">
-                                                           <input type="text" name="Name" id="Name" >
+                                                           <input type="text" name="FName" id="Name" >
                                                         </td>
                                                         <td class="listhead">
                                                            <label id="fon">Last Name <span style="color:#C00000;">*</span></label>
@@ -882,20 +944,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
                                                             :
                                                         </td>
                                                         <td height="30" align="left">
-                                                          <input type="text" name="LastName" id="Name" >
+                                                          <input type="text" name="LName" id="Name" >
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td height="30" class="listhead">
-                                                           <label id="fon">Father Name <span style="color:#C00000;">*</span></label>
-                                                        </td>
-                                                        <td class="listhead">
-                                                            :
-                                                        </td>
-                                                        <td height="30" align="left">
-                                                             <input type="text" name="Fathername" id="Fathername" >
-                                                        </td>
-                                                        
                                                         <td height="30" class="listhead">
                                                             <label id="fon">Mobile <span style="color:#C00000;">*</span></label>
                                                         </td>
@@ -904,17 +956,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
                                                         </td>
                                                         <td height="30" align="left">
                                                             <input type="tel" name="PhoneNo" id="Phone_No" >
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td height="30" class="listhead">
-                                                            <label id="fon">Mother Name <span style="color:#C00000;">*</span></label>
-                                                        </td>
-                                                        <td class="listhead">
-                                                            :
-                                                        </td>
-                                                        <td height="30" class="inputlabel" align="left">
-                                                             <input type="text" name="Mothername" id="Mothername" >
                                                         </td>
                                                         <td height="30" class="listhead">
                                                             <label id="fon">Marital Status &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
@@ -937,18 +978,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
                                                              <input type="text" name="Gender" id="Gender" >
                                                         </td>
                                                         <td height="30" class="listhead">
-                                                            <label id="fon">Address <span style="color:#C00000;">*</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-															</label>
-                                                        </td>
-                                                        <td class="listhead">
-                                                            :
-                                                        </td>
-                                                        <td height="30" align="left">
-                                                             <input type="text" name="Address" id="Address" >
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td height="30" class="listhead">
                                                              <label id="fon">Date of birth <span style="color:#C00000;">*</span>
 															</label>
                                                         </td>
@@ -958,6 +987,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
                                                         <td height="30" class="inputlabel" align="left">
                                                              <input type="date" name="DOB" id="DOB">
                                                         </td>
+                                                        
+                                                    </tr>
+                                                    <tr>
+                                                        <td height="30" class="listhead">
+                                                            <label id="fon">Address1<span style="color:#C00000;">*</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+															</label>
+                                                        </td>
+                                                        <td class="listhead">
+                                                            :
+                                                        </td>
+                                                        <td height="30" align="left">
+                                                             <input type="text" name="Address1" id="Address" >
+                                                        </td>
+                                                         <td height="30" class="listhead">
+                                                            <label id="fon">Address2<span style="color:#C00000;">*</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+															</label>
+                                                        </td>
+                                                        <td class="listhead">
+                                                            :
+                                                        </td>
+                                                        <td height="30" align="left">
+                                                             <input type="text" name="Address2" id="Address" >
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
                                                         <td height="30" class="listhead">
                                                             <label id="fon">City / Town<span style="color:#C00000;"></span>
 															</label>
@@ -967,17 +1021,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
                                                         </td>
                                                         <td height="30" class="inputlabel" align="left">
                                                              <input type="text" name="City" id="City" >
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td height="30" class="listhead">
-                                                           <label id="fon">PAN <span style="color:#C00000;">*</span></label>
-                                                        </td>
-                                                        <td class="listhead">
-                                                            :
-                                                        </td>
-                                                        <td height="30" class="inputlabel" align="left">
-                                                             <input type="tel" name="PAN" id="PAN" >
                                                         </td>
                                                         <td height="30" class="listhead">
                                                             <label id="fon">State <span style="color:#C00000;"></span>
@@ -992,13 +1035,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
                                                     </tr>
                                                     <tr>
                                                         <td height="30" class="listhead">
-                                                           <label id="fon">Email <span style="color:#C00000;">*</span></label>
+                                                           <label id="fon">PAN <span style="color:#C00000;">*</span></label>
                                                         </td>
                                                         <td class="listhead">
                                                             :
                                                         </td>
                                                         <td height="30" class="inputlabel" align="left">
-                                                             <input type="email" name="Email" id="Email" >
+                                                             <input type="tel" name="PAN" id="PAN" >
                                                         </td>
                                                         <td height="30" class="listhead">
                                                               <label id="fon">Pincode <span style="color:#C00000;">*</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -1013,25 +1056,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
                                                     </tr>
                                                     <tr>
                                                         <td height="30" class="listhead">
-                                                            <label id="fon">Occupation <span style="color:#C00000;"></span>
-															</label>
+                                                           <label id="fon">Email <span style="color:#C00000;">*</span></label>
                                                         </td>
                                                         <td class="listhead">
                                                             :
                                                         </td>
-                                                        <td height="30" align="left">
-                                                             <input type="text" name="Occupation" id="Occupation" >
-                                                        </td>
-                                                       
-                                                        <td class="listhead">
-                                                             <label id="fon">Mode of communication <span style="color:#C00000;"></span>
-															</label>
-                                                        </td>
-                                                        <td class="listhead">
-                                                            :
-                                                        </td>
-                                                        <td height="30" align="left">
-                                                             <input type="text">
+                                                        <td height="30" class="inputlabel" align="left">
+                                                             <input type="email" name="Email" id="Email" >
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -1080,7 +1111,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
                                                             :
                                                         </td>
                                                         <td height="30" align="left" colspan="3">
-                                                            <span id="ctl00_MainContent_lblpayeename" class="Label_Orange"></span>
+                                                            <span id="ctl00_MainContent_lblpayeename" class="Label_Orange"><?php echo "$PayeeName" ?></span>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -1091,38 +1122,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
                                                             :
                                                         </td>
                                                         <td height="30" align="left">
-                                                            <span id="ctl00_MainContent_lblaccno" class="Label_Orange">335689545852</span>
+                                                            <span id="ctl00_MainContent_lblaccno" class="Label_Orange"><?php echo "$AccountNo" ?></span>
                                                         </td>
                                                         <td height="30" class="listhead">
-                                                            <label id="fon">	Bank Name <span style="color:#C00000;">*</span></label>
+                                                           <label id="fon">	Bank Name <span style="color:#C00000;">*</span></label>
                                                         </td>
                                                         <td class="listhead">
                                                             :
                                                         </td>
                                                         <td height="30" class="inputlabel" align="left">
-                                                            <span id="ctl00_MainContent_lblbank" class="Label_Orange">STATE BANK OF INDIA</span>
+                                                            <span id="ctl00_MainContent_lblbank" class="Label_Orange"><?php echo "$Bankname" ?></span>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td height="30" class="listhead">
-                                                           <label id="fon">IFSC Code	<span style="color:#C00000;">*</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <label id="fon">IFSC Code	<span style="color:#C00000;">*</span>&nbsp;&nbsp;&nbsp;&nbsp;
 												</label>
                                                         </td>
                                                         <td class="listhead">
                                                             :
                                                         </td>
                                                         <td height="30" align="left">
-                                                            <span id="ctl00_MainContent_lblifscode" class="Label_Orange">sbin0000989</span>
+                                                            <span id="ctl00_MainContent_lblifscode" class="Label_Orange"><?php echo "$IFSCcode" ?></span>
                                                         </td>
                                                         <td height="30" class="listhead">
-                                                           <label id="fon">	Branch Name <span style="color:#C00000;">*</span>
+                                                            <label id="fon">	Branch Name <span style="color:#C00000;">*</span>
 												</label>
                                                         </td>
                                                         <td class="listhead">
                                                             :
                                                         </td>
                                                         <td height="30" class="inputlabel" align="left">
-                                                            <span id="ctl00_MainContent_lblbranch" class="Label_Orange">PRAKASH NAGAR</span>
+                                                            <span id="ctl00_MainContent_lblbranch" class="Label_Orange"><?php echo "$Branchname" ?></span>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -1164,36 +1195,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
                                                     </tr>
                                                     <tr>
                                                         <td height="30" class="listhead">
-                                                             <label id="fon"> Nominee Name <span style="color:#C00000;">*</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                           <label id="fon"> Nominee Name <span style="color:#C00000;">*</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 											</label>
                                                         </td>
                                                         <td class="listhead">
                                                             :
                                                         </td>
                                                         <td height="30" align="left">
-                                                            <span id="ctl00_MainContent_lblnominee" class="Label_Orange">saritha</span>
+                                                            <span id="ctl00_MainContent_lblnominee" class="Label_Orange"><?php echo "$Nomineename" ?></span>
                                                         </td>
                                                         <td height="30" class="listhead">
-                                                              <label id="fon">Relation <span style="color:#C00000;">*</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                           <label id="fon">Relation <span style="color:#C00000;">*</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 											</label>
                                                         </td>
                                                         <td class="listhead">
                                                             :
                                                         </td>
                                                         <td height="30" align="left">
-                                                            <span id="ctl00_MainContent_lblrelation" class="Label_Orange">mother</span>
+                                                            <span id="ctl00_MainContent_lblrelation" class="Label_Orange"><?php echo "$Nomineerelation" ?></span>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td height="30" class="listhead">
-                                                              <label id="fon">Age<span style="color:#C00000;">*</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                           <label id="fon">Age<span style="color:#C00000;">*</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 											</label>
                                                         </td>
                                                         <td class="listhead">
                                                             :
                                                         </td>
                                                         <td height="30" class="inputlabel" align="left" colspan="3">
-                                                            <span id="ctl00_MainContent_lblnomage" class="Label_Orange">48</span>
+                                                            <span id="ctl00_MainContent_lblnomage" class="Label_Orange"><?php echo "$Nomineeage" ?></span>
                                                         </td>
                                                     </tr>
                                                     <tr>
