@@ -1,4 +1,58 @@
 <!DOCTYPE html>
+<?php
+session_start();
+include ('connect.php');
+$Id=$_SESSION['Id'];
+$query= "SELECT `FName`,`LName` FROM `users` WHERE `Id` = '$Id'";
+$query_run=mysql_query($query);
+$row=mysql_fetch_assoc($query_run);
+$FName=$row['FName'];
+$LName=$row['LName'];
+if ($_SERVER["REQUEST_METHOD"] == "POST")
+{
+    $Oldpassword=$_POST['Oldpassword'];
+    $Newpassword=$_POST['Newpassword'];
+    $Confirmpassword=$_POST['Confirmpassword'];
+    $query= "SELECT `FName`,`LName`,`Password` FROM `users` WHERE `Id` = '$Id'";
+    $query_run=mysql_query($query);
+    if($query_run)
+    {
+      $row=mysql_fetch_assoc($query_run);
+      $Password=$row['Password'];
+      $FName=$row['FName'];
+      $LName=$row['LName'];
+      if($Oldpassword == $Password)
+      {
+      	if($Newpassword == $Confirmpassword)
+      	{
+      		$query="UPDATE `users` SET `Password`='$Newpassword' WHERE `Id` = '$Id'";
+      		$query_run=mysql_query($query);
+      		if($query_run)
+      		{
+      			echo ("<SCRIPT LANGUAGE='JavaScript'>
+    					window.alert('Succesfully Updated')
+    					window.location.href='home.php';
+    				  </SCRIPT>");
+      		}
+      	}
+      	else
+      	{
+      		echo ("<SCRIPT LANGUAGE='JavaScript'>
+					window.alert('New Password and Confirmpassword doesnot match')
+					window.location.href='changepass.php';
+				  </SCRIPT>");
+      	}
+      }
+      else
+      {
+      	echo ("<SCRIPT LANGUAGE='JavaScript'>
+				window.alert('Password provided doesnot match with your old password')
+				window.location.href='changepass.php';
+			  </SCRIPT>");
+      }
+    }
+}
+?>
 <html lang="en">
 <head>
 	
@@ -260,7 +314,7 @@
 		
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 							<img src="assets/images/venkat.png" alt="" class="img-circle" width="44" />
-							Venkata Krishna
+							<?php  echo "$FName $LName";   ?>
 						</a>
 		
 						<ul class="dropdown-menu">
@@ -736,6 +790,8 @@
                 <tr>
                     <td><br><br>
 					<div style="margin-left:+100px;color:#848484;">
+					<div style="margin-left:+100px;color:#848484;">
+					<form action='changepass.php' method="POST">
                         <table width="75%" align="center" border="0" cellspacing="10" cellpadding="5" style="padding:10px;">
                             <tbody><tr>
                                 <td class="fome-text1">
@@ -745,10 +801,10 @@
                                     &nbsp;:&nbsp;
                                 </td>
                                 <td>
-                                    <input name="ctl00$MainContent$txtOldPwd" type="password" id="ctl00_MainContent_txtOldPwd" class="inputtext">
+                                    <input name="Oldpassword" type="password" id="Oldpassword" class="inputtext">
                                     <span id="ctl00_MainContent_rfvOldPwd" title="Old Password is required." style="color:Red;display:none;"></span>
                                     
-                                    <input type="hidden" name="ctl00$MainContent$OldPwdVCE_ClientState" id="ctl00_MainContent_OldPwdVCE_ClientState">
+                                    <!--<input type="hidden" name="ctl00$MainContent$OldPwdVCE_ClientState" id="ctl00_MainContent_OldPwdVCE_ClientState">-->
                                     
                                 </td>
                             </tr>
@@ -760,11 +816,9 @@
                                     &nbsp;:&nbsp;
                                 </td>
                                 <td>
-                                    <input name="ctl00$MainContent$txtPassword" type="password" id="ctl00_MainContent_txtPassword" class="inputtext">
+                                    <input name="Newpassword" type="password" id="Newpassword" class="inputtext">
                                     <span id="ctl00_MainContent_PwdRFV" title="Password is required." style="color:Red;display:none;"></span>
                                     <span id="ctl00_MainContent_revPwd" style="color:OrangeRed;visibility:hidden;">.</span>
-                                    <input type="hidden" name="ctl00$MainContent$PwdVCE_ClientState" id="ctl00_MainContent_PwdVCE_ClientState">
-                                    <input type="hidden" name="ctl00$MainContent$VCExtPwd_ClientState" id="ctl00_MainContent_VCExtPwd_ClientState">
                                 </td>
                             </tr>
                             <tr>
@@ -775,11 +829,9 @@
                                     &nbsp;:&nbsp;
                                 </td>
                                 <td>
-                                    <input name="ctl00$MainContent$txtConPwd" type="password" id="ctl00_MainContent_txtConPwd" class="inputtext">
+                                    <input name="Confirmpassword" type="password" id="Confirmpassword" class="inputtext">
                                     <span id="ctl00_MainContent_rfvConPwd" title="Confirm Password is required." style="color:Red;display:none;"></span>
                                     <span id="ctl00_MainContent_cvConPwd" title="Password And Confirmed Password Mismatch" style="color:Red;display:none;"></span>
-                                    <input type="hidden" name="ctl00$MainContent$CPwdVCE_ClientState" id="ctl00_MainContent_CPwdVCE_ClientState">
-                                    <input type="hidden" name="ctl00$MainContent$CPwdCVE1_ClientState" id="ctl00_MainContent_CPwdCVE1_ClientState">
                                 </td>
                             </tr>
                             <tr>
@@ -787,7 +839,7 @@
                                     &nbsp;
                                 </td>
                                 <td><br><br>
-                                    <input type="submit" name="ctl00$MainContent$BtnSubmit" value="Submit" onclick="return confirm('Do you want me to proceed?');WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$MainContent$BtnSubmit&quot;, &quot;&quot;, true, &quot;ChgPwd&quot;, &quot;&quot;, false, false))" id="ctl00_MainContent_BtnSubmit" title="Submit" class="Submit">
+                                    <input type="submit" name="submit" value="Submit" onclick="" title="Submit" class="Submit">
                                 </td>
                             </tr>
                         </tbody></table>
@@ -795,6 +847,7 @@
                 </tr>
             </tbody></table>
         </td>
+        </form>
 		</div>
 		<!-- Footer -->
 		<footer class="main">
