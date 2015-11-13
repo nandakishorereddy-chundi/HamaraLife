@@ -2,6 +2,10 @@
 <?php
 include('connect.php');
 session_start();
+if(!isset($_SESSION['Id']) OR empty($_SESSION['Id'])) 
+{
+	header("Location: index.php");
+}
 $Id=$_SESSION['Id'];
 $query="SELECT `OrderId`, `Product`, `FName`, `LName`, `PhoneNo`, `Email`, `Gender`, `DOB`, `PAN`, `RefId`, `Password`, 
 `Martialstatus`, `Address1`, `Address2`, `City`, `State`, `Country`, `PIN`, `AccountNo`, `Bankname`, `IFSCcode`, `Branchname`,
@@ -777,7 +781,7 @@ $query_run=mysql_query($query);
 					<a href="contact.php">Contact Us&nbsp;<i class="entypo-mobile right"></i></a>
 				</li>		
 				<li>
-					<a href="index.php">Logout&nbsp;<i class="entypo-logout right"></i></a>
+					<a href="logout.php">Logout&nbsp;<i class="entypo-logout right"></i></a>
 				</li>	
 		
 					

@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <?php
-session_start();
 include ('connect.php');
+session_start();
+if(!isset($_SESSION['Id']) OR empty($_SESSION['Id'])) 
+{
+	header("Location: index.php");
+}
 $Id=$_SESSION['Id'];
 $query= "SELECT `FName`,`LName` FROM `users` WHERE `Id` = '$Id'";
 $query_run=mysql_query($query);
@@ -760,7 +764,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 					<a href="contact.php">Contact Us&nbsp;<i class="entypo-mobile right"></i></a>
 				</li>		
 				<li>
-					<a href="index.php">Logout&nbsp;<i class="entypo-logout right"></i></a>
+					<a href="logout.php">Logout&nbsp;<i class="entypo-logout right"></i></a>
 				</li>	
 		
 					

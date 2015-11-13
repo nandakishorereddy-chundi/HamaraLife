@@ -2,6 +2,10 @@
 <?php
 include('connect.php');
 session_start();
+if(!isset($_SESSION['Id']) OR empty($_SESSION['Id'])) 
+{
+	header("Location: index.php");
+}
 $Id=$_SESSION['Id'];
 $query="SELECT `FName`, `LName` FROM `users` WHERE `Id`='$Id'";
 $query_run=mysql_query($query);
@@ -252,7 +256,7 @@ if($query_run)
 					</ul>
 				</li>
 				<li>
-					<a href="index.php">
+					<a href="logout.php">
 						<i class="entypo-lock-open"></i>
 						<span class="title">Logout</span>
 						
@@ -726,7 +730,7 @@ if($query_run)
 					<a href="contact.php">Contact Us&nbsp;<i class="entypo-mobile right"></i></a>
 				</li>		
 				<li>
-					<a href="index.php">Logout&nbsp;<i class="entypo-logout right"></i></a>
+					<a href="logout.php">Logout&nbsp;<i class="entypo-logout right"></i></a>
 				</li>	
 		
 					
