@@ -137,11 +137,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 	      $query_run=mysql_query($query);
 	      if($query_run)
 	      {
-  				echo "alert('sucess')";
-	      }
-	      else
-	      {
-  			echo "alert('failed')";
+  				echo ("<SCRIPT LANGUAGE='JavaScript'>
+    					window.location.href='home.php';
+    				  </SCRIPT>");
 	      }
 	    }
 	}
