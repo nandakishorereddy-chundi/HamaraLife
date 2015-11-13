@@ -290,7 +290,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 					</ul>
 				</li>
 				<li>
-					<a href="index.php">
+					<a href="logout.php">
 						<i class="entypo-lock-open"></i>
 						<span class="title">Logout</span>
 						

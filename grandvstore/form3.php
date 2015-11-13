@@ -306,7 +306,7 @@ $query_run=mysql_query($query);
 					</ul>
 				</li>
 				<li>
-					<a href="logout..php">
+					<a href="logout.php">
 						<i class="entypo-lock-open"></i>
 						<span class="title">Logout</span>
 						
