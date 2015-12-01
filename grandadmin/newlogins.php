@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<?php
+require('connect.php');
+?>
 <html lang="en">
 <head>
 	
@@ -56,7 +59,7 @@ th {
 
 				<!-- logo -->
 				<div class="logo">
-					<a href="home.php">
+					<a href="index.html">
 						<img src="assets/images/hamarabol.png" width="165" alt="" />
 					</a>
 				</div>
@@ -83,14 +86,14 @@ th {
 				<!-- add class "multiple-expanded" to allow multiple submenus to open -->
 				<!-- class "auto-inherit-active-class" will automatically add "active" class for parent elements who are marked already with class "active" -->
 				<li class="active opened active">
-					<a href="home.php">
+					<a href="index.html">
 						<i class="entypo-home"></i>
 						<span class="title">Home</span>
 					</a>
 					
 				</li>
 				<li>
-					<a href="newlogins.php">
+					<a href="newlogins.html">
 						<i class="entypo-user"></i>
 						<span class="title">New Logins</span>
 					</a>
@@ -99,33 +102,33 @@ th {
 				
 				
 				<li>
-					<a href="payouts.php">
+					<a href="payouts.html">
 						<i class="entypo-doc-text"></i>
 						<span class="title">Payouts</span>
 					</a>
 					<ul>
 						<li>
-							<a href="week.php">
+							<a href="week.html">
 								<span class="title">Week Income</span>
 							</a>
 						</li>
 						<li>
-							<a href="binaryinc.php">
+							<a href="binaryinc.html">
 								<span class="title">Binary Income</span>
 							</a>
 						</li>
 						<li>
-							<a href="rankinc.php">
+							<a href="rankinc.html">
 								<span class="title">Rank Income</span>
 							</a>
 						</li>
 						<li>
-							<a href="ebuyinc.php">
+							<a href="ebuyinc.html">
 								<span class="title">EBuy Income</span>
 							</a>
 						</li>
 						<li>
-							<a href="awardsinc.php">
+							<a href="awardsinc.html">
 								<span class="title">Awards & Rewards</span>
 							</a>
 						</li>
@@ -133,13 +136,13 @@ th {
 					</ul>
 				</li>
 				<li>
-					<a href="repurchases.php">
+					<a href="repurchases.html">
 						<i class="entypo-users"></i>
 						<span class="title">Re-purchases</span>
 					</a>
 				</li>
 				<li>
-					<a href="weekpurchases.php">
+					<a href="weekpurchases.html">
 						<i class="entypo-credit-card"></i>
 						<span class="title">Weekly Purchases</span>
 					</a>
@@ -177,28 +180,28 @@ th {
 		
 							<!-- Profile sub-links -->
 							<li>
-								<a href="form.php">
+								<a href="form.html">
 									<i class="entypo-user"></i>
 									Show profile
 								</a>
 							</li>
 		
 							<li>
-								<a href="changepass.php">
+								<a href="changepass.html">
 									<i class="entypo-pencil"></i>
 									Change Password
 								</a>
 							</li>
 		
 							<li>
-								<a href="letter.php">
+								<a href="letter.html">
 									<i class="entypo-progress-0"></i>
 									Welcome Letter
 								</a>
 							</li>
 		
 							<li>
-								<a href="message.php">
+								<a href="message.html">
 									<i class="entypo-mail"></i>
 									Message Box
 								</a>
@@ -537,7 +540,7 @@ th {
 				<ul class="list-inline links-list pull-right">
 		
 				<li>
-					<a href="home.php">Home&nbsp;<i class="entypo-home right"></i></a>
+					<a href="index.html">Home&nbsp;<i class="entypo-home right"></i></a>
 						
 				</li>		
 		<li class="dropdown language-selector">
@@ -549,11 +552,11 @@ th {
 		
 						<ul class="dropdown-menu pull-right">
 							<li>
-								<a href="about.php">About Us
+								<a href="about.html">About Us
 								</a>
 							</li>
 							<li>
-								<a href="legal.php">legal
+								<a href="legal.html">legal
 								</a>
 							</li>
 						</ul>
@@ -597,11 +600,11 @@ th {
 		
 						<ul class="dropdown-menu pull-right">
 							<li>
-								<a href="products.php">Products
+								<a href="products.html">Products
 								</a>
 							</li>
 							<li>
-								<a href="combo.php">Combo Products
+								<a href="combo.html">Combo Products
 								</a>
 							</li>
 							
@@ -610,10 +613,10 @@ th {
 		</li>	
 		
 				<li>
-					<a href="contact.php">Contact Us&nbsp;<i class="entypo-mobile right"></i></a>
+					<a href="contact.html">Contact Us&nbsp;<i class="entypo-mobile right"></i></a>
 				</li>		
 				<li>
-					<a href="index.php">Logout&nbsp;<i class="entypo-logout right"></i></a>
+					<a href="logout.html">Logout&nbsp;<i class="entypo-logout right"></i></a>
 				</li>	
 		
 					
@@ -664,422 +667,55 @@ th {
         
 
     </tr>
-    <tr>
-        <td >
-            1	
-        </td>
-        <td >
-           1	
-        </td>
-        <td >
-            gv1520	
-        </td>
-        <td >
-            TV	
-        </td>
-        <td >
-            50
-        </td>
-        <td>
-            <center><button class="buttongreen">ACTIVATE</button>&nbsp;&nbsp;<button class="buttonred">DE-ACTIVATE</button></center>
-        </td>
-     
-    </tr>
-     <tr>
-        <td >
-            2	
-        </td>
-        <td >
-           2	
-        </td>
-        <td >
-           gv1020	
-        </td>
-        <td >
-            MOBILE
-        </td>
-        <td >
-            	30	
-        </td>
-        <td>
-            <center><button class="buttongreen">ACTIVATE</button>&nbsp;&nbsp;<button class="buttonred">DE-ACTIVATE</button></center>
-        </td>
-     
-    </tr>
-     <tr>
-        <td >
-            3
-        </td>
-        <td >
-          	3	
-        </td>
-        <td >
-            gv1201	
-        </td>
-        <td >
-            COOKER	
-        </td>
-        <td >
-            150	
-        </td>
-        <td>
-            <center><button class="buttongreen">ACTIVATE</button>&nbsp;&nbsp;<button class="buttonred">DE-ACTIVATE</button></center>
-        </td>
-     
-    </tr>
-     <tr>
-        <td >
-            4	
-        </td>
-        <td >
-           4	
-        </td>
-        <td >
-            gv1552
-        </td>
-        <td >
-           	MIXER GRINDER	
-        </td>
-        <td >
-            200
-        </td>
-        <td>
-            <center><button class="buttongreen">ACTIVATE</button>&nbsp;&nbsp;<button class="buttonred">DE-ACTIVATE</button></center>
-        </td>
-     
-    </tr>
-	 <tr>
-        <td >
-            5	
-        </td>
-        <td >
-           5	
-        </td>
-        <td >
-            gv1544
-        </td>
-        <td >
-           	SPARX SHOE
-        </td>
-        <td >
-            150
-        </td>
-        <td>
-            <center><button class="buttongreen">ACTIVATE</button>&nbsp;&nbsp;<button class="buttonred">DE-ACTIVATE</button></center>
-        </td>
-     
-    </tr>
-	 <tr>
-        <td >
-            6	
-        </td>
-        <td >
-           6	
-        </td>
-        <td >
-            gv1543
-        </td>
-        <td >
-           	PRESSURE COOKER
-        </td>
-        <td >
-            600
-        </td>
-        <td>
-            <center><button class="buttongreen">ACTIVATE</button>&nbsp;&nbsp;<button class="buttonred">DE-ACTIVATE</button></center>
-        </td>
-     
-    </tr>
-	 <tr>
-        <td >
-            7	
-        </td>
-        <td >
-           7	
-        </td>
-        <td >
-            gv1550
-        </td>
-        <td >
-           	IRON BOX	
-        </td>
-        <td >
-            300
-        </td>
-        <td>
-            <center><button class="buttongreen">ACTIVATE</button>&nbsp;&nbsp;<button class="buttonred">DE-ACTIVATE</button></center>
-        </td>
-     
-    </tr> <tr>
-        <td >
-            8	
-        </td>
-        <td >
-           8	
-        </td>
-        <td >
-            gv1559
-        </td>
-        <td >
-           	BLENDER
-        </td>
-        <td >
-            250
-        </td>
-        <td>
-            <center><button class="buttongreen">ACTIVATE</button>&nbsp;&nbsp;<button class="buttonred">DE-ACTIVATE</button></center>
-        </td>
-     
-    </tr>
-	 <tr>
-        <td >
-            9	
-        </td>
-        <td >
-           9	
-        </td>
-        <td >
-            gv1566
-        </td>
-        <td >
-           DINNER SET	
-        </td>
-        <td >
-            120
-        </td>
-        <td>
-            <center><button class="buttongreen">ACTIVATE</button>&nbsp;&nbsp;<button class="buttonred">DE-ACTIVATE</button></center>
-        </td>
-     
-    </tr> <tr>
-        <td >
-            10	
-        </td>
-        <td >
-           10
-        </td>
-        <td >
-            gv1558
-        </td>
-        <td >
-           	VKC SANDALS
-        </td>
-        <td >
-            220
-        </td>
-        <td>
-            <center><button class="buttongreen">ACTIVATE</button>&nbsp;&nbsp;<button class="buttonred">DE-ACTIVATE</button></center>
-        </td>
-     
-    </tr> 
-	<tr>
-        <td >
-            11	
-        </td>
-        <td >
-           11	
-        </td>
-        <td >
-            gv1421	
-        </td>
-        <td >
-            PRESTIGE HUNDI COOKER
-        </td>
-        <td >
-            500
-        </td>
-        <td>
-            <center><button class="buttongreen">ACTIVATE</button>&nbsp;&nbsp;<button class="buttonred">DE-ACTIVATE</button></center>
-        </td>
-     
-    </tr>
-     <tr>
-        <td >
-            12	
-        </td>
-        <td >
-           12	
-        </td>
-        <td >
-           gv1422	
-        </td>
-        <td >
-            MOBILE
-        </td>
-        <td >
-            	300	
-        </td>
-        <td>
-            <center><button class="buttongreen">ACTIVATE</button>&nbsp;&nbsp;<button class="buttonred">DE-ACTIVATE</button></center>
-        </td>
-     
-    </tr>
-     <tr>
-        <td >
-            13
-        </td>
-        <td >
-          	13	
-        </td>
-        <td >
-            gv1430	
-        </td>
-        <td >
-            INDUCTION COOK- TOP 	
-        </td>
-        <td >
-            150	
-        </td>
-        <td>
-            <center><button class="buttongreen">ACTIVATE</button>&nbsp;&nbsp;<button class="buttonred">DE-ACTIVATE</button></center>
-        </td>
-     
-    </tr>
-     <tr>
-        <td >
-            14	
-        </td>
-        <td >
-           14	
-        </td>
-        <td >
-            gv1425
-        </td>
-        <td >
-           	OMEGA DELUXE GRANITE KADAI
-        </td>
-        <td >
-            200
-        </td>
-        <td>
-            <center><button class="buttongreen">ACTIVATE</button>&nbsp;&nbsp;<button class="buttonred">DE-ACTIVATE</button></center>
-        </td>
-     
-    </tr>
-	 <tr>
-        <td >
-            15	
-        </td>
-        <td >
-           15	
-        </td>
-        <td >
-            gv1427
-        </td>
-        <td >
-           	KITCHEN HOOD CLASSIC STEEL 
-        </td>
-        <td >
-            500
-        </td>
-        <td>
-            <center><button class="buttongreen">ACTIVATE</button>&nbsp;&nbsp;<button class="buttonred">DE-ACTIVATE</button></center>
-        </td>
-     
-    </tr>
-	 <tr>
-        <td >
-            16	
-        </td>
-        <td >
-           16	
-        </td>
-        <td >
-            gv1544
-        </td>
-        <td >
-           	PRESTIGE CERAMIC CURRY POT
-        </td>
-        <td >
-            600
-        </td>
-        <td>
-            <center><button class="buttongreen">ACTIVATE</button>&nbsp;&nbsp;<button class="buttonred">DE-ACTIVATE</button></center>
-        </td>
-     
-    </tr>
-	 <tr>
-        <td >
-            17	
-        </td>
-        <td >
-           17	
-        </td>
-        <td >
-            gv1556
-        </td>
-        <td >
-           	PRESTIGE L.P.GAS STOVE 
-        </td>
-        <td >
-            300
-        </td>
-        <td>
-            <center><button class="buttongreen">ACTIVATE</button>&nbsp;&nbsp;<button class="buttonred">DE-ACTIVATE</button></center>
-        </td>
-     
-    </tr> <tr>
-        <td >
-            18	
-        </td>
-        <td >
-           18	
-        </td>
-        <td >
-            gv1550
-        </td>
-        <td >
-           	MILTON SS FLASK THERMOSTEEL 
-        </td>
-        <td >
-            250
-        </td>
-        <td>
-            <center><button class="buttongreen">ACTIVATE</button>&nbsp;&nbsp;<button class="buttonred">DE-ACTIVATE</button></center>
-        </td>
-     
-    </tr>
-	 <tr>
-        <td >
-            19	
-        </td>
-        <td >
-           19	
-        </td>
-        <td >
-            gv1436
-        </td>
-        <td >
-           FLITE FOR WOMEN
-        </td>
-        <td >
-            120
-        </td>
-        <td>
-            <center><button class="buttongreen">ACTIVATE</button>&nbsp;&nbsp;<button class="buttonred">DE-ACTIVATE</button></center>
-        </td>
-     
-    </tr> <tr>
-        <td >
-            20	
-        </td>
-        <td >
-           20
-        </td>
-        <td >
-            gv1456
-        </td>
-        <td >
-           	PRESTIGEHOBTOP FOUR BURNER 
-        </td>
-        <td >
-            420
-        </td>
-        <td>
-            <center><button class="buttongreen">ACTIVATE</button>&nbsp;&nbsp;<button class="buttonred">DE-ACTIVATE</button></center>
-        </td>
-     
-    </tr> 
+    <?php
+    	$query="SELECT `Id`,`RefId`,`OrderId`,`Product` FROM `users` WHERE `Flag`= 0";
+    	$query_run=mysql_query($query);
+    	if($query_run)
+		{
+			while($row=mysql_fetch_assoc($query_run))
+			{
+				$Id=$row['Id'];
+				$RefId=$row['RefId'];
+				$OrderId=$row['OrderId'];
+				$Product=$row['Product'];
+				if($Product==0)
+					$Product="";
+				else if($Product==1)
+					$Product="Combo Product 1";
+				else if($Product==2)
+					$Product="Combo Product 2";
+				else if($Product==3)
+					$Product="Combo Product 3";
+				else if($Product==4)
+					$Product="Combo Product 4";
+				else if($Product==5)
+					$Product="Combo Product 5";
+				else if($Product==6)
+					$Product="Combo Product 6";
+				else if($Product==7)
+					$Product="Combo Product 7";
+				else if($Product==8)
+					$Product="Combo Product 8";
+				else if($Product==9)
+					$Product="Combo Product 9";
+				else if($Product==10)
+					$Product="Combo Product 10";
+				echo "<tr>";
+				echo "<td>$RefId</td>";
+				echo "<td>$Id</td>";
+				echo "<td>$OrderId</td>";
+				echo "<td>$Product</td>";
+				echo "<td></td>";
+				echo "<td>
+						<form method='post' style='border:0'>
+							<button class='buttongreen' type='submit' formaction='updateuser.php?Id=$Id'>ACTIVATE</button>
+							<button class='buttonred' type='submit' formaction='deleteuser.php?Id=$Id'>DE-ACTIVATE</button>
+						</form>
+					 </td>";
+				echo "</tr>";
+			}
+		}
+    ?>
     
 </table>	
 </div>								
